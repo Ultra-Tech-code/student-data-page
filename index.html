@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Student Form</title>
+</head>
+<body>
+
+
+  <h1>Student Page</h1>
+
+
+  <div class="form-container">
+    <h2 class="form-title"> Student Form</h2>
+
+    <form name="studentData" onsubmit="addItem(event)">
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" name="studentName" placeholder="Full Name">
+        </div>
+
+        <div class="form-group">
+            <label for="studentAge">Age:</label>
+        <input type="number" id="studentAge" name="studentAge" placeholder="Age">
+        </div>
+
+        <div class="form-group">
+            <label for="studentGroup">Group:</label>
+        <input type="text" id="studentGroup" name="studentGroup" placeholder="Group">
+        </div>
+
+        <div class="form-group">
+            <label for="itemQuantity">Email:</label>
+        <input type="email" id="studentEmail" name="itemQuantity" placeholder="Email">
+        </div>
+
+        <input class="button" type="submit">
+    </form>
+  </div>
+
+
+<div class="form-container">
+    <select id="width">
+        <option>Select width</option>
+        <option value="500px">500</option>
+        <option value="700px">700</option>
+        <option value="900px">900</option>
+      </select>
+    
+      <select id="font-size">
+        <option>Select Font Size</option>
+        <option value="20px">20px</option>
+        <option value="30px">30px</option>
+        <option value="40px">40px</option>
+      </select>
+    
+      <input id="themes" type="color" style="width: 50px; margin: 20px;">
+    
+    
+    
+      <button onclick="ApplyTheme()">change Display setting</button>
+</div>
+
+  <section class="table-container">
+    <table id="inventory">
+        <thead>
+          <th>FullName</th>
+          <th>Age</th>
+          <th>Group</th>
+          <th>email</th>
+        </thead>
+      </table>
+  </section>
+
+
+
+
+
+  <script>
+    //get the table
+    var inventory = document.getElementById("inventory")
+
+    function addItem(e){
+      e.preventDefault();
+      let studentData = document.forms["studentData"];
+         
+      //getting the data through the formdata
+          let data = new FormData(studentData);
+
+          //creating a row in the table
+          let row = inventory.insertRow();
+               
+          //iterate through each of the form element
+          for (let [key, value] of data ){
+            let newCell = row.insertCell()
+        
+             //console.log("data key", data.get(key))
+            newCell.textContent = value;
+          }
+    }
+
+    function ApplyTheme(){
+      let selectedTheme = document.getElementById("themes");
+      let selectedWidth = document.getElementById("width");
+      let selectedFont = document.getElementById("font-size");
+        inventory.style.backgroundColor = selectedTheme.value;
+        inventory.style.width = selectedWidth.value;
+        inventory.style.fontSize = selectedFont.value;
+    }
+  </script>
+</body>
+</html>
